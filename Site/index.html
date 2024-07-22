@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQuiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            width: 50%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            text-align: left;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            display: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>QUIMICA</h1>
+        <div class="question">
+            <p>Qual é a capital da França?</p>
+            <div class="options">
+                <label><input type="radio" name="question1" value="0"> Londres</label>
+                <label><input type="radio" name="question1" value="1"> Paris</label>
+                <label><input type="radio" name="question1" value="0"> Berlim</label>
+                <label><input type="radio" name="question1" value="0"> Madrid</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>Qual é o símbolo químico do elemento Ouro?</p>
+            <div class="options">
+                <label><input type="radio" name="question2" value="1"> Au</label>
+                <label><input type="radio" name="question2" value="0"> Ag</label>
+                <label><input type="radio" name="question2" value="0"> O</label>
+                <label><input type="radio" name="question2" value="0"> Hg</label>
+            </div>
+        </div>
+        <button onclick="submitQuiz()">Enviar</button>
+        <div class="result"></div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const answers = [1, 1];
+            let score = 0;
+            
+            answers.forEach((answer, index) => {
+                const questionName = `question${index + 1}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedOption && parseInt(selectedOption.value) === answer) {
+                    score++;
+                }
+            });
+
+            const resultDiv = document.querySelector('.result');
+            resultDiv.textContent = `Você acertou ${score} de ${answers.length} perguntas.`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
